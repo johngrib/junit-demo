@@ -28,9 +28,9 @@ class ComplexTest {
     }
   }
 
-  @Nested @DisplayName("Given: Sum 메소드")
+  @Nested @DisplayName("Describe: Sum 메소드")
   class DescribeSum {
-    @Nested @DisplayName("When: 실수부와 허수부가 있는 두 복소수가 있을 때")
+    @Nested @DisplayName("Context: 실수부와 허수부가 있는 두 복소수가 있을 때")
     class Context_with_naturals {
       private final Complex a = Complex.of(1d, 2d);
       private final Complex b = Complex.of(32d, 175d);
@@ -39,14 +39,14 @@ class ComplexTest {
         return Complex.sum(a, b);
       }
 
-      @Test @DisplayName("Then: 실수부는 실수부끼리 덧셈해야 한다")
+      @Test @DisplayName("It: 실수부는 실수부끼리 덧셈해야 한다")
       void it_returns_complex_has_each_real_sum() {
         final double expect = a.getReal() + b.getReal();
         final double result = subject().getReal();
         assertThat(result, is(expect));
       }
 
-      @Test @DisplayName("Then: 허수부는 허수부끼리 덧셈해야 한다")
+      @Test @DisplayName("It: 허수부는 허수부끼리 덧셈해야 한다")
       void it_returns_complex_has_each_imagine_sum() {
         final double expect = a.getImagine() + b.getImagine();
         final double result = subject().getImagine();
@@ -55,28 +55,28 @@ class ComplexTest {
     }
   }
 
-  @Nested @DisplayName("Given: toString 메소드")
+  @Nested @DisplayName("Describe: toString 메소드")
   class GivenToString {
-    @Nested @DisplayName("When: 실수부만 있다면")
+    @Nested @DisplayName("Context: 실수부만 있는 복소수라면")
     class Context_with_naturals {
       private final double givenNatual = 3d;
       private Complex given = Complex.of(givenNatual);
       private String expectPattern = "^3(?:\\.0+)?$";
 
-      @Test @DisplayName("Then: 실수부만 표현해야 한다")
+      @Test @DisplayName("It: 실수부만 표현해야 한다")
       void it_has_0_imagine_value() {
         assertTrue(given.toString().matches(expectPattern));
       }
     }
 
-    @Nested @DisplayName("When: 실수부와 허수부가 있다면")
+    @Nested @DisplayName("Context: 실수부와 허수부가 있는 복소수라면")
     class Context_with_imagine {
       private final double givenNatual = 3d;
       private final double givenImagine = 7d;
       private Complex given = Complex.of(givenNatual, givenImagine);
       private String expectPattern = "^3(?:\\.0+)?\\+7(?:\\.0+)?i$";
 
-      @Test @DisplayName("Then: 실수부 + 허수부i 형식으로 표현해야 한다")
+      @Test @DisplayName("It: 실수부 + 허수부i 형식으로 표현해야 한다")
       void it_has_0_imagine_value() {
         System.out.println(given);
         assertTrue(given.toString().matches(expectPattern));
