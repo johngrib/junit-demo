@@ -28,6 +28,33 @@ class ComplexTest {
     }
   }
 
+  @Nested @DisplayName("Given: Sum 메소드")
+  class DescribeSum {
+    @Nested @DisplayName("When: 실수부와 허수부가 있는 두 복소수가 있을 때")
+    class Context_with_naturals {
+      private final Complex a = Complex.of(1d, 2d);
+      private final Complex b = Complex.of(32d, 175d);
+
+      Complex subject() {
+        return Complex.sum(a, b);
+      }
+
+      @Test @DisplayName("Then: 실수부는 실수부끼리 덧셈해야 한다")
+      void it_returns_complex_has_each_real_sum() {
+        final double expect = a.getReal() + b.getReal();
+        final double result = subject().getReal();
+        assertThat(result, is(expect));
+      }
+
+      @Test @DisplayName("Then: 허수부는 허수부끼리 덧셈해야 한다")
+      void it_returns_complex_has_each_imagine_sum() {
+        final double expect = a.getImagine() + b.getImagine();
+        final double result = subject().getImagine();
+        assertThat(result, is(expect));
+      }
+    }
+  }
+
   @Nested @DisplayName("Given: toString 메소드")
   class GivenToString {
     @Nested @DisplayName("When: 실수부만 있다면")

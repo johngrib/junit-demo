@@ -4,6 +4,9 @@ import lombok.Getter;
 
 import java.util.Objects;
 
+/**
+ * 복소수를 정의한다
+ */
 public class Complex {
   @Getter
   private double real;
@@ -24,6 +27,16 @@ public class Complex {
 
   public static Complex of(double real) {
     return new Complex(real, 0);
+  }
+
+  /**
+   * 두 복소수의 덧셈을 연산한다
+   * @param a
+   * @param b
+   * @return
+   */
+  public static Complex sum(Complex a, Complex b) {
+    return new Complex(a.real + b.real, a.imagine + b.imagine);
   }
 
   @Override
